@@ -20,8 +20,9 @@
     "posttest": "yarn run check"
   },
   "devDependencies": {
+    "@types/node": "^10.0.3",
     "gts": "^2.0.0",
-    "typescript": "~3.8.0",
-    "@types/node": "^10.0.3"
+    "ts-protoc-gen": "^0.12.0",
+    "typescript": "~3.8.0"
   }
 }
