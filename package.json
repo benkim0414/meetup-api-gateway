@@ -20,10 +20,15 @@
     "posttest": "yarn run check"
   },
   "devDependencies": {
+    "@types/google-protobuf": "^3.7.2",
     "@types/node": "^10.0.3",
     "grpc-tools": "^1.8.1",
     "gts": "^2.0.0",
     "ts-protoc-gen": "^0.12.0",
     "typescript": "~3.8.0"
+  },
+  "dependencies": {
+    "google-protobuf": "^3.11.4",
+    "grpc": "^1.24.2"
   }
 }
