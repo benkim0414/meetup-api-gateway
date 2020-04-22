@@ -17,9 +17,13 @@
     "fix": "gts fix",
     "prepare": "yarn run compile",
     "pretest": "yarn run compile",
-    "posttest": "yarn run check"
+    "posttest": "yarn run check",
+    "codegen:graphql": "./node_modules/.bin/graphql-codegen"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.13.3",
+    "@graphql-codegen/typescript": "^1.13.3",
+    "@graphql-codegen/typescript-resolvers": "^1.13.3",
     "@types/google-protobuf": "^3.7.2",
     "@types/node": "^10.0.3",
     "grpc-tools": "^1.8.1",
