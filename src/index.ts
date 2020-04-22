@@ -1,24 +1,20 @@
-console.log('Try npm run check/fix!');
+import {ApolloServer} from 'apollo-server';
+import {importSchema} from 'graphql-import';
+import {resolvers} from './resolvers';
+import {GroupAPI} from './datasources/group';
+import {CalendarAPI} from './datasources/calendar';
 
-const longString =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut aliquet diam.';
+const typeDefs = importSchema('./**/*.graphql');
 
-const trailing = 'Semicolon';
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  dataSources: () => ({
+    groupAPI: new GroupAPI(),
+    calendarAPI: new CalendarAPI(),
+  }),
+});
 
-const why = 'am I tabbed?';
-
-export function doSomeStuff(
-  withThis: string,
-  andThat: string,
-  andThose: string[]
-) {
-  //function on one line
-  if (!andThose.length) {
-    return false;
-  }
-  console.log(withThis);
-  console.log(andThat);
-  console.dir(andThose);
-  return;
-}
-// TODO: more examples
+server.listen().then(({url}: {url: string}) => {
+  console.log(`app listening at ${url}`);
+});
