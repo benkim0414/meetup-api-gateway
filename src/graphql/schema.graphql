@@ -1,0 +1,103 @@
+type Query {
+  groups(pageSize: Int, pageToken: String): GroupConnection!
+  group(id: ID!): Group
+  calendars(pageSize: Int, pageToken: String): CalendarConnection!
+  calendar(id: ID!): Calendar
+}
+
+type Mutation {
+  createGroup(group: GroupInput!): Group
+  deleteGroup(id: ID!): Boolean
+  addMember(groupId: ID!, email: String!): Member
+  expelMember(groupId: ID!, memberId: ID!): Boolean
+  createCalendar(calendar: CalendarInput!): Calendar
+  deleteCalendar(id: ID!): Boolean
+  createEvent(calendarId: ID!, text: String!): Event
+  cancelEvent(calendarId: ID!, eventId: ID!): Boolean
+}
+
+type Group {
+  id: ID!
+  name: String!
+  email: String!
+  description: String
+  members(pageSize: Int, pageToken: String): MemberConnection!
+}
+
+type GroupConnection {
+  nextPageToken: String!
+  hasNextPage: Boolean!
+  groups: [Group]!
+}
+
+input GroupInput {
+  name: String!
+  description: String
+}
+
+type Member {
+  id: ID!
+  email: String!
+  status: String
+}
+
+type MemberConnection {
+  nextPageToken: String!
+  hasNextPage: Boolean!
+  members: [Member]!
+}
+
+type Calendar {
+  id: ID!
+  summary: String!
+  description: String
+  location: String
+  timeZone: String
+  events(pageSize: Int, pageToken: String): EventConnection!
+}
+
+type CalendarConnection {
+  nextPageToken: String!
+  hasNextPage: Boolean!
+  calendars: [Calendar]!
+}
+
+input CalendarInput {
+  summary: String!
+  description: String
+  timeZone: String
+}
+
+type Event {
+  id: ID!
+  status: String
+  htmlLink: String
+  createdAt: String
+  updatedAt: String
+  summary: String!
+  description: String
+  location: String
+  creator: String
+  organizer: String
+  startAt: String
+  endAt: String
+  iCalUid: String
+  attendees: [Attendee]!
+}
+
+type Attendee {
+  id: ID!
+  email: String
+  displayName: String
+  isOrganizer: Boolean
+  isOptional: Boolean
+  response: String
+  comment: String
+  additionalGuests: Int
+}
+
+type EventConnection {
+  nextPageToken: String!
+  hasNextPage: Boolean!
+  events: [Event]!
+}
